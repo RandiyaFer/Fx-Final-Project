@@ -1,9 +1,9 @@
 package Controller;
 
-import Bo.custom.RegisterBo;
-import Bo.custom.impl.RegisterBoImpl;
-import dto.RegisterDto;
-import dto.tm.RegisterTm;
+import Bo.custom.CreateBo;
+import Bo.custom.impl.CreateBoImpl;
+import dto.CreateDto;
+import dto.tm.CreateTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,46 +17,39 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterFormController {
-
+public class CreateUserFormController {
     public TextField emailTxt;
-    public TextField nameTxt;
     public Button loginBtn;
-    public TextField jobTxt;
-    public TextField contactTxt;
+    public TextField passwordTxt;
+    public TextField confirmTxt;
     public BorderPane pane;
 
-    private RegisterBo registerBo = new RegisterBoImpl();
+    private CreateBo createBo = new CreateBoImpl();
 
-    private ObservableList<RegisterTm> tmList = FXCollections.observableArrayList();
+    private ObservableList<CreateTm> tmList = FXCollections.observableArrayList();
 
     public void EnterBtn(ActionEvent actionEvent) {
-        List<RegisterDto> list = new ArrayList<>();
-        for (RegisterTm tm:tmList) {
-            list.add(new RegisterDto(
-                    tm.getName(),
+        List<CreateDto> list = new ArrayList<>();
+        for (CreateTm tm:tmList) {
+            list.add(new CreateDto(
                     tm.getEmail(),
-                    tm.getJobRole(),
-                    tm.getConNo()
+                    tm.getPassword(),
+                    tm.getConfirm()
             ));
         }
 
-        RegisterDto dto = new RegisterDto(
-                nameTxt.getText(),
+        CreateDto dto = new CreateDto(
                 emailTxt.getText(),
-                jobTxt.getText(),
-                contactTxt.getText()
-
+                passwordTxt.getText(),
+                confirmTxt.getText()
         );
 
 
         try {
-            boolean isSaved = registerBo.saveOrder(dto);
+            boolean isSaved = createBo.saveOrder(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION, "Order Saved!").show();
             }else{
@@ -70,6 +63,7 @@ public class RegisterFormController {
     }
 
     public void backButtonOnAction(ActionEvent actionEvent) {
+
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBoardForm.fxml"))));

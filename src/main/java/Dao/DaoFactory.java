@@ -1,6 +1,6 @@
 package Dao;
 
-
+import Dao.custom.impl.CreateDaoImpl;
 import Dao.custom.impl.RegisterDaoImpl;
 import Dao.util.DaoType;
 
@@ -17,7 +17,7 @@ public class DaoFactory {
     public <T extends SuperDao>T getDao(DaoType type){
         switch (type){
             case REGISTER: return(T) new RegisterDaoImpl();
-
+            case CREATE: return(T) new CreateDaoImpl();
 
         }
         return null;

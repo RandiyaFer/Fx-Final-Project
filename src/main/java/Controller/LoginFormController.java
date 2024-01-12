@@ -13,10 +13,14 @@ public class LoginFormController {
     public TextField emailTxt;
     public Button loginBtn;
     public Label forgetId;
+
+
     public void forgetBtn(MouseEvent mouseEvent) {
         System.out.println("Clicked");
     }
     public void enterBtn(ActionEvent actionEvent) {
         System.out.println("clicked");
     }
+
+
 }
