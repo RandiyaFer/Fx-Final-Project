@@ -1,5 +1,4 @@
 package Controller;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,20 +18,22 @@ public class DashBoardFormController {
 
     public BorderPane pane;
 
+    public String type;
+
     public void reportsBtn(ActionEvent actionEvent) {
-//        Stage stage = (Stage) pane.getScene().getWindow();
-//        try {
-//            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/reportsForm.fxml"))));
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        Stage stage = (Stage) pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm2Form.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void registerBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/RegisterForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"))));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,7 +43,7 @@ public class DashBoardFormController {
     public void createBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CreateUserForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"))));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,7 +54,7 @@ public class DashBoardFormController {
 
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm2.fxml"))));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,7 +65,7 @@ public class DashBoardFormController {
 
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm2.fxml"))));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

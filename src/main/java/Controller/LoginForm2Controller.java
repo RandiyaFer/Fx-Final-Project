@@ -13,34 +13,27 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 
-public class LoginFormController {
-
-
-    public static Object enterBtn;
+public class LoginForm2Controller {
     public TextField passwordTxt;
     public TextField emailTxt;
-    public Button loginBtn;
     public Label forgetId;
+    public Button loginBtn;
     public BorderPane pane;
-
-    public JFrame f;
-
+    public JOptionPane f;
 
     public void forgetBtn(MouseEvent mouseEvent) {
         System.out.println("Clicked");
     }
     public void enterBtn(ActionEvent actionEvent) {
 
-        Object[] options = {"Register User",
-                "Create User",
-                "Cancel"};
+        Object[] options = {"Order", "Item", "Reports"};
         int n = JOptionPane.showOptionDialog(f, "Please Select your Option Again?", "Confirm Box",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
         if (n==JOptionPane.YES_OPTION){
             Stage stage = (Stage) pane.getScene().getWindow();
             try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/RegisterForm.fxml"))));
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderForm.fxml"))));
                 stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {
@@ -50,7 +43,7 @@ public class LoginFormController {
         }else if (n==JOptionPane.NO_OPTION){
             Stage stage = (Stage) pane.getScene().getWindow();
             try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CreateUserForm.fxml"))));
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml"))));
                 stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {
@@ -59,7 +52,7 @@ public class LoginFormController {
         }else{
             Stage stage = (Stage) pane.getScene().getWindow();
             try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBoardForm.fxml"))));
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ReportsForm.fxml"))));
                 stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {
@@ -78,6 +71,4 @@ public class LoginFormController {
             throw new RuntimeException(e);
         }
     }
-
-
 }
