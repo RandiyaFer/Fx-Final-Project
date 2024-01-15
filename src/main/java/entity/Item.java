@@ -11,9 +11,10 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Create {
+public class Item {
     @Id
-    private String email;
-    private String password;
-    private String confirm;
+    private String itemCode;
+    private String category;
+    private String subCategory;
+    private String description;
 }

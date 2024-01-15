@@ -1,5 +1,6 @@
-package dto;
+package dto.tm;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import lombok.*;
 
 @Getter
@@ -7,7 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateDto {
+public class CreateUserTm extends RecursiveTreeObject<CreateUserTm> {
     private String email;
     private String password;
     private String confirm;

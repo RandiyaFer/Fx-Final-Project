@@ -1,6 +1,7 @@
 package Dao;
 
-import Dao.custom.impl.CreateDaoImpl;
+import Dao.custom.impl.CreateUserDaoImpl;
+import Dao.custom.impl.ItemDaoImpl;
 import Dao.custom.impl.RegisterDaoImpl;
 import Dao.util.DaoType;
 
@@ -17,8 +18,8 @@ public class DaoFactory {
     public <T extends SuperDao>T getDao(DaoType type){
         switch (type){
             case REGISTER: return(T) new RegisterDaoImpl();
-            case CREATE: return(T) new CreateDaoImpl();
-
+            case CREATE: return(T) new CreateUserDaoImpl();
+            case ITEM: return(T) new ItemDaoImpl();
         }
         return null;
     }

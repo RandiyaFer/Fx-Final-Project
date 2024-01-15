@@ -1,9 +1,9 @@
 package Controller;
 
-import Bo.custom.CreateBo;
-import Bo.custom.impl.CreateBoImpl;
-import dto.CreateDto;
-import dto.tm.CreateTm;
+import Bo.custom.CreateUserBo;
+import Bo.custom.impl.CreateUserBoImpl;
+import dto.CreateUserDto;
+import dto.tm.CreateUserTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,21 +27,21 @@ public class CreateUserFormController {
     public TextField confirmTxt;
     public BorderPane pane;
 
-    private CreateBo createBo = new CreateBoImpl();
+    private CreateUserBo createBo = new CreateUserBoImpl();
 
-    private ObservableList<CreateTm> tmList = FXCollections.observableArrayList();
+    private ObservableList<CreateUserTm> tmList = FXCollections.observableArrayList();
 
     public void EnterBtn(ActionEvent actionEvent) {
-        List<CreateDto> list = new ArrayList<>();
-        for (CreateTm tm:tmList) {
-            list.add(new CreateDto(
+        List<CreateUserDto> list = new ArrayList<>();
+        for (CreateUserTm tm:tmList) {
+            list.add(new CreateUserDto(
                     tm.getEmail(),
                     tm.getPassword(),
                     tm.getConfirm()
             ));
         }
 
-        CreateDto dto = new CreateDto(
+        CreateUserDto dto = new CreateUserDto(
                 emailTxt.getText(),
                 passwordTxt.getText(),
                 confirmTxt.getText()
