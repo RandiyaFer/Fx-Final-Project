@@ -19,6 +19,7 @@ public class DashBoardFormController {
     public BorderPane pane;
 
     public String type;
+    public Button customerBtn;
 
     public void reportsBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
@@ -77,6 +78,16 @@ public class DashBoardFormController {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/PlaceOrderForm.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void customerBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerForm.fxml"))));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

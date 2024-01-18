@@ -28,7 +28,6 @@ public class ItemFormController {
     public TableColumn descriptionCol;
     public TableColumn subCol;
     public TableColumn categoryCol;
-    public TableColumn itemcodecol;
     public Label subCateLbl;
     public Label descLbl;
     public JFXComboBox categoryTxt;
@@ -40,13 +39,14 @@ public class ItemFormController {
     public AnchorPane pane;
     public JFXTextField itemCodeTxt;
     public TableView tblItem;
+    public TableColumn itemCodeCol;
 
     private ItemBo itemBo = new ItemBoImpl();
 
     private ObservableList<ItemTm> tmList = FXCollections.observableArrayList();
 
     public void initialize(){
-        itemcodecol.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        itemCodeCol.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         subCol.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -89,7 +89,7 @@ public class ItemFormController {
         if (newValue != null) {
             itemCodeTxt.setEditable(false);
             itemCodeTxt.setText(newValue.getItemCode());
-//            categoryTxt.setItems(newValue.getCategory());
+            categoryTxt.setValue(newValue.getCategory().toString());
             subTxt.setText(newValue.getSubCategory());
             descTxt.setText(newValue.getDescription());
         }

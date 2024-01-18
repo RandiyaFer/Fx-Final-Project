@@ -77,6 +77,11 @@
                   <Font name="Segoe UI Bold" size="19.0" />
                </font>
             </Button>
+            <Button fx:id="customerBtn" mnemonicParsing="false" onAction="#customerBtn" prefHeight="38.0" prefWidth="195.0" style="-fx-background-color: #C09B16;" text="Customer" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Segoe UI Bold" size="19.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
    </right>
