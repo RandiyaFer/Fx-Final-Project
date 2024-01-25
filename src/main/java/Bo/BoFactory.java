@@ -4,6 +4,7 @@ import Bo.custom.CustomerBo;
 import Bo.custom.impl.CreateUserBoImpl;
 //import Bo.custom.impl.CustomerBoImpl;
 import Bo.custom.impl.ItemBoImpl;
+import Bo.custom.impl.OrderBoImpl;
 import Bo.custom.impl.RegisterBoImpl;
 
 import Dao.util.BoType;
@@ -25,6 +26,7 @@ public class BoFactory {
             case REGISTER: return (T) new RegisterBoImpl();
             case CREATE: return (T) new CreateUserBoImpl();
             case ITEM: return (T) new ItemBoImpl();
+            case ORDER: return (T) new OrderBoImpl();
            // case CUSTOMER: return (T) new CustomerBoImpl();
 //            case ORDER_DETAIL: return (T) new OrderDetailBoImpl();
 

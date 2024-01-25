@@ -3,6 +3,7 @@ package Dao.custom.impl;
 import Dao.custom.ItemDao;
 import Dao.util.HibernateUtil;
 import dto.ItemDto;
+import dto.OrderDto;
 import entity.Item;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -30,7 +31,6 @@ public class ItemDaoImpl implements ItemDao {
     public boolean update(Item entity) throws SQLException, ClassNotFoundException {
 
         Session session = HibernateUtil.getSession();
-
         Transaction transaction = session.beginTransaction();
         Item item = session.find(Item.class, entity.getItemCode());
         item.setItemCode(entity.getItemCode());

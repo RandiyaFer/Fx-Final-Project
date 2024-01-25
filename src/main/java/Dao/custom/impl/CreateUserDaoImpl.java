@@ -2,9 +2,12 @@ package Dao.custom.impl;
 
 import Dao.custom.CreateUserDao;
 import Dao.util.HibernateUtil;
+import dto.OrderDto;
 import entity.CreateUser;
+import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -32,6 +35,10 @@ public class CreateUserDaoImpl implements CreateUserDao {
 
     @Override
     public List<CreateUser> getAll() throws SQLException, ClassNotFoundException {
-        return null;
+        Session session = HibernateUtil.getSession();
+        Query query = session.createQuery("FROM CreateUser");
+        List<CreateUser> list = query.list();
+        session.close();
+        return list;
     }
 }

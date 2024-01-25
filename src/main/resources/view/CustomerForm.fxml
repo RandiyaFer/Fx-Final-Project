@@ -68,12 +68,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField prefHeight="31.0" prefWidth="301.0" promptText="Search" style="-fx-background-color: #C09B16;" GridPane.columnIndex="1">
+            <TextField prefHeight="38.0" prefWidth="301.0" promptText="Search" style="-fx-background-color: #C09B16;" GridPane.columnIndex="1">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold Italic" size="15.0" />
                </font>
             </TextField>
-            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchBtn" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #137F31;" text="Search" textFill="WHITE" GridPane.columnIndex="3">
+            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchBtn" prefHeight="21.0" prefWidth="100.0" style="-fx-background-color: #137F31;" text="Search" textFill="WHITE" GridPane.columnIndex="3">
                <font>
                   <Font name="Segoe UI Bold" size="17.0" />
                </font>
@@ -96,18 +96,18 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <JFXTextField fx:id="emailTxt" focusColor="WHITE" prefHeight="33.0" prefWidth="167.0" unFocusColor="#c09b16" GridPane.columnIndex="7" GridPane.rowIndex="4">
+            <JFXTextField fx:id="emailTxt" focusColor="WHITE" prefHeight="42.0" prefWidth="167.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="7" GridPane.rowIndex="4">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="nameTxt" focusColor="WHITE" unFocusColor="#c09b16" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <JFXTextField fx:id="nameTxt" focusColor="WHITE" prefHeight="39.0" prefWidth="166.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </JFXTextField>
             <Label fx:id="custLbl" alignment="CENTER" prefHeight="36.0" prefWidth="148.0" style="-fx-background-color: #C09B16;" text="Customer ID" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -130,13 +130,13 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="customerIdTxt" focusColor="WHITE" prefHeight="31.0" prefWidth="109.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <JFXTextField fx:id="customerIdTxt" focusColor="WHITE" prefHeight="13.0" prefWidth="148.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></JFXTextField>
-            <JFXTextField fx:id="contNoTxt" focusColor="WHITE" unFocusColor="#c09b16" GridPane.columnIndex="5" GridPane.rowIndex="4">
+            <JFXTextField fx:id="contNoTxt" focusColor="WHITE" prefHeight="39.0" prefWidth="166.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </JFXTextField>
          </children>

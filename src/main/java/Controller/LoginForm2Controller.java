@@ -25,8 +25,7 @@ public class LoginForm2Controller {
         System.out.println("Clicked");
     }
     public void enterBtn(ActionEvent actionEvent) {
-
-        Object[] options = {"Order", "Item", "Reports"};
+        Object[] options = {"Order", "Item", "Customer"};
         int n = JOptionPane.showOptionDialog(f, "Please Select your Option Again?", "Confirm Box",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
@@ -52,7 +51,7 @@ public class LoginForm2Controller {
         }else{
             Stage stage = (Stage) pane.getScene().getWindow();
             try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ReportsForm.fxml"))));
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerForm.fxml"))));
                 stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {

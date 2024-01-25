@@ -5,9 +5,13 @@ import Dao.DaoFactory;
 import Dao.custom.CreateUserDao;
 import Dao.util.DaoType;
 import dto.CreateUserDto;
+import dto.CustomerDto;
 import entity.CreateUser;
+import entity.Customer;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateUserBoImpl implements CreateUserBo {
 
@@ -20,5 +24,19 @@ public class CreateUserBoImpl implements CreateUserBo {
                 dto.getPassword(),
                 dto.getConfirm()
         ));
+    }
+
+    @Override
+    public List<CreateUserDto> allUsers() throws SQLException, ClassNotFoundException {
+        List<CreateUser> entityList = createDao.getAll();
+        List<CreateUserDto> list = new ArrayList<>();
+        for (CreateUser createUser:entityList) {
+            list.add(new CreateUserDto(
+                    createUser.getEmail(),
+                    createUser.getPassword(),
+                    createUser.getConfirm()
+            ));
+        }
+        return list;
     }
 }

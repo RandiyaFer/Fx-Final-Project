@@ -33,7 +33,7 @@ public class LoginFormController {
 
         Object[] options = {"Register User",
                 "Create User",
-                "Cancel"};
+                "Report"};
         int n = JOptionPane.showOptionDialog(f, "Please Select your Option Again?", "Confirm Box",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
@@ -59,7 +59,7 @@ public class LoginFormController {
         }else{
             Stage stage = (Stage) pane.getScene().getWindow();
             try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBoardForm.fxml"))));
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/PlaceOrderForm.fxml"))));
                 stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {

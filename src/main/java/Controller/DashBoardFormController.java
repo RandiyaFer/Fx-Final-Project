@@ -24,7 +24,7 @@ public class DashBoardFormController {
     public void reportsBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm2Form.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"))));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class DashBoardFormController {
     public void customerBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm2.fxml"))));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

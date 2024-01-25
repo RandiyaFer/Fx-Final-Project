@@ -9,10 +9,11 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlaceOrderTm extends RecursiveTreeObject<PlaceOrderTm> {
-    private String itemCode;
+public class OrderTm extends RecursiveTreeObject<OrderTm> {
+    private String orderId;
+    private String date;
+    private String customerId;
     private String subCategory;
-    private String description;
-    private double Advance;
+    private String status;
     private Button btn;
 }

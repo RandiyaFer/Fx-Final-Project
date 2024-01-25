@@ -2,6 +2,8 @@ package Dao.custom.impl;
 
 import Dao.custom.RegisterDao;
 import Dao.util.HibernateUtil;
+import dto.OrderDto;
+import dto.RegisterDto;
 import entity.Register;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

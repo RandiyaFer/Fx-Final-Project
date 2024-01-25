@@ -1,15 +1,10 @@
 package Controller;
 
 import Bo.custom.CustomerBo;
-import Bo.custom.ItemBo;
 import Bo.custom.impl.CustomerBoImpl;
-import Bo.custom.impl.ItemBoImpl;
 import com.jfoenix.controls.JFXTextField;
 import dto.CustomerDto;
-import dto.ItemDto;
 import dto.tm.CustomerTm;
-import dto.tm.ItemTm;
-import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

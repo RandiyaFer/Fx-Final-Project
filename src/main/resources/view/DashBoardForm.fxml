@@ -47,7 +47,7 @@
             <RowConstraints maxHeight="347.0" minHeight="10.0" prefHeight="170.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#reportsBtn" prefHeight="38.0" prefWidth="195.0" style="-fx-background-color: #C09B16;" text="Reports" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#reportsBtn" prefHeight="38.0" prefWidth="195.0" style="-fx-background-color: #C09B16;" text="Reports" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font name="Segoe UI Bold" size="19.0" />
                </font>
@@ -77,7 +77,7 @@
                   <Font name="Segoe UI Bold" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="customerBtn" mnemonicParsing="false" onAction="#customerBtn" prefHeight="38.0" prefWidth="195.0" style="-fx-background-color: #C09B16;" text="Customer" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Button fx:id="customerBtn" mnemonicParsing="false" onAction="#customerBtn" prefHeight="38.0" prefWidth="195.0" style="-fx-background-color: #C09B16;" text="Customer" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <font>
                   <Font name="Segoe UI Bold" size="19.0" />
                </font>
