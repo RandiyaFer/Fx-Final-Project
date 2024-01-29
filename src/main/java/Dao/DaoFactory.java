@@ -21,6 +21,7 @@ public class DaoFactory {
             case ITEM: return(T) new ItemDaoImpl();
             case CUSTOMER: return(T) new CustomerDaoImpl();
             case ORDER: return(T) new OrderDaoImpl();
+            case PLACEORD:return(T) new placeOrdDaoImpl();
         }
         return null;
     }

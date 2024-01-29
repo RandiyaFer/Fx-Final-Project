@@ -2,10 +2,7 @@ package Controller;
 
 import Bo.custom.*;
 import Bo.custom.impl.*;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import dto.*;
 import dto.tm.PlaceOrderTm;
@@ -38,10 +35,10 @@ public class PlaceOrderFormController {
     public Button loginBtn;
     public Button placeOrderBtn;
     public Label TotalLb;
-    public TableColumn orderId;
-    public TableColumn custId;
-    public TableColumn itemCode;
-    public TableColumn option;
+    public TreeTableColumn orderId;
+    public TreeTableColumn custId;
+    public TreeTableColumn itemCode;
+    public TreeTableColumn option;
     public Button addCartBtn;
     public Label customerIdLabel;
     public Label customerNameLbl;
@@ -57,15 +54,15 @@ public class PlaceOrderFormController {
     public JFXTextField descTxt;
     public JFXTextField catTxt;
     public JFXTextField subTxt;
-    public TableColumn subCatCol;
+    public TreeTableColumn subCatCol;
     public Label orderLbl;
     public Label time;
-    public TableColumn Advance;
+    public TreeTableColumn Advance;
     public JFXTextField advanceTxt;
     public Label advanceLbl;
-    public TableView placeTbl;
-    public TableColumn subCategory;
-    public TableColumn description;
+    public JFXTreeTableView placeTbl;
+    public TreeTableColumn subCategory;
+    public TreeTableColumn description;
     public Label stsLbl;
 
     private CustomerBo customerBo = new CustomerBoImpl();
@@ -87,7 +84,6 @@ public class PlaceOrderFormController {
         description.setCellValueFactory(new TreeItemPropertyValueFactory<>("description"));
         Advance.setCellValueFactory(new TreeItemPropertyValueFactory<>("Advance"));
         option.setCellValueFactory(new TreeItemPropertyValueFactory<>("btn"));
-
 
         try {
             customers = customerBo.allCustomers();
@@ -212,8 +208,8 @@ public class PlaceOrderFormController {
         TotalLb.setText(String.format("%.2f",total));
 
         TreeItem treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
-//        placeTbl.setRoot(treeItem);
-//        placeTbl.setShowRoot(false);
+        placeTbl.setRoot(treeItem);
+        placeTbl.setShowRoot(false);
     }
 
     public void backButtonOnAction(ActionEvent actionEvent) {
@@ -243,15 +239,24 @@ public class PlaceOrderFormController {
             ));
         }
 
-        OrderDto dto = new OrderDto(
-                    orderLbl.getText(),
-                    time.getText(),
-                    custBox.getValue().toString(),
-                    subTxt.getText(),
-                    stsLbl.getText()
-                );
+//        OrderDto dto = new OrderDto(
+//                    orderLbl.getText(),
+//                    time.getText(),
+//                    custBox.getValue().toString(),
+//                    subTxt.getText(),
+//                    stsLbl.getText()
+//                );
+
+        placeOrdDto dto = new placeOrdDto(
+                orderLbl.getText(),
+                custBox.getValue().toString(),
+                itemBox.getValue().toString(),
+                user.getValue().toString(),
+                Double.parseDouble(advanceTxt.getText())
+        );
+        clearFields();
         try {
-            boolean isSaved = orderBo.saveOrder(dto);
+            boolean isSaved = PlaceOrdBo.saveOrder(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION, "Order Saved!").show();
                 setOrderId();
@@ -263,5 +268,18 @@ public class PlaceOrderFormController {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void clearFields() {
+        placeTbl.refresh();
+        descTxt.clear();
+        subTxt.clear();
+        user.setValue(null);
+        custBox.setValue(null);
+        itemBox.setValue(null);
+        nameTxt.clear();
+        catTxt.clear();
+        advanceTxt.clear();
+
     }
 }

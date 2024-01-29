@@ -1,17 +1,20 @@
 package Dao.custom.impl;
 
 import Dao.custom.placeOrdDao;
+import Dao.util.HibernateUtil;
 import dto.placeOrdDto;
 import entity.placeOrder;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class placeOrdDaoImpl implements placeOrdDao {
-    @Override
-    public boolean save(placeOrder entity) throws SQLException, ClassNotFoundException {
-        return false;
-    }
+//    @Override
+//    public boolean save(placeOrder entity) throws SQLException, ClassNotFoundException {
+//        return false;
+//    }
 
     @Override
     public boolean update(placeOrder entity) throws SQLException, ClassNotFoundException {
@@ -32,15 +35,15 @@ public class placeOrdDaoImpl implements placeOrdDao {
     public placeOrdDto getLastOrder() throws SQLException, ClassNotFoundException {
         return null;
     }
-    //@Override
-//    public boolean save(placeOrder entity) throws SQLException, ClassNotFoundException {
-//        Session session = HibernateUtil.getSession();
-//        Transaction transaction = session.beginTransaction();
-//        session.save(entity);
-//        transaction.commit();
-//        session.close();
-//        return true;
-//    }
+    @Override
+    public boolean save(placeOrder entity) throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(entity);
+        transaction.commit();
+        session.close();
+        return true;
+    }
 //
 //    public ItemDto searchItem(String id) {
 //        return null;
