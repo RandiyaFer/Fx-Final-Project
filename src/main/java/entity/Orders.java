@@ -1,5 +1,6 @@
 package entity;
 
+import com.google.protobuf.StringValue;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,12 +8,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Orders {
     @Id
-    private String orderId;
+    private String id;
     private String date;
 
     @ManyToOne
@@ -22,10 +22,23 @@ public class Orders {
     private String subCategory;
     private String status;
 
-    public Orders(String orderId, String date, String subCategory, String status) {
-        this.orderId = orderId;
+    public Orders(String orderId, String date,Customer customer, String subCategory, String status) {
+        this.id = orderId;
         this.date = date;
+        this.customer=customer;
         this.subCategory = subCategory;
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", customer=" + customer +
+                ", subCategory='" + subCategory + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
 }

@@ -1,17 +1,13 @@
 package Controller;
 
-import Bo.custom.CustomerBo;
-import Bo.custom.OrderBo;
-import Bo.custom.impl.CustomerBoImpl;
-import Bo.custom.impl.OrderBoImpl;
+import Bo.custom.PartsBo;
+import Bo.custom.impl.PartsBoImpl;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import dto.CustomerDto;
-import dto.ItemDto;
 import dto.OrderDto;
-import dto.tm.CustomerTm;
+import dto.PartsDto;
 import dto.tm.OrderTm;
+import dto.tm.partsTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,35 +22,28 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class OrderFormController {
+public class orderPartsFormController {
     public TextField searchBar;
+    public JFXTextField customerIdTxt;
     public JFXTextField orderIdTxt;
     public JFXTextField subTxt;
+    public JFXTextField dateTxt;
+    public JFXTextField statusText;
+    public JFXComboBox partsBox;
+    public TableView tblOrder;
     public TableColumn orderIdCol;
     public TableColumn custCol;
     public TableColumn subCol;
-    public TableColumn statusCol;
-    public JFXTextField customerIdTxt;
-    public TableColumn option;
-
-    public AnchorPane pane;
-    public JFXRadioButton processingBtn;
-    public JFXRadioButton preparedBtn;
-    public ToggleGroup radioStatus;
-    public JFXRadioButton completeBtn;
-    public JFXTextField statusText;
-    public TableView tblOrder;
-    public JFXTextField dateTxt;
     public TableColumn dateCol;
-    public JFXComboBox partsBox;
-    public JFXTextField totalTxt;
-
+    public TableColumn statusCol;
     public TableColumn parts;
     public TableColumn total;
+    public AnchorPane pane;
+    public JFXTextField totalTxt;
 
-    private OrderBo orderBo = new OrderBoImpl();
+    private PartsBo partsBo = new PartsBoImpl();
 
-    private ObservableList<OrderTm> tmList = FXCollections.observableArrayList();
+    private ObservableList<partsTm> tmList = FXCollections.observableArrayList();
 
     public void initialize(){
         orderIdCol.setCellValueFactory(new PropertyValueFactory<>("orderId"));
@@ -62,32 +51,31 @@ public class OrderFormController {
         custCol.setCellValueFactory(new PropertyValueFactory<>("CustomerId"));
         subCol.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-        option.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        parts.setCellValueFactory(new PropertyValueFactory<>("part"));
+        total.setCellValueFactory(new PropertyValueFactory<>("total"));
         loadOrderTable();
 
+        partsBox.getItems().addAll("Antenna", "Board");
+
         tblOrder.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            setData((OrderTm) newValue);
+            setData((partsTm) newValue);
         });
     }
 
     private void loadOrderTable() {
-        ObservableList<OrderTm> tmList = FXCollections.observableArrayList();
+        ObservableList<partsTm> tmList = FXCollections.observableArrayList();
         try {
-            List<OrderDto> dtoList  = orderBo.allOrders();
-            for (OrderDto dto:dtoList) {
-                Button btn = new Button("Delete");
-                OrderTm tm = new OrderTm(
+            List<PartsDto> dtoList  = partsBo.allOrders();
+            for (PartsDto dto:dtoList) {
+                partsTm tm = new partsTm(
                         dto.getId(),
                         dto.getDate(),
                         dto.getCustomerId(),
                         dto.getSubCategory(),
                         dto.getStatus(),
-                        btn
+                        dto.getPart(),
+                        dto.getTotal()
                 );
-
-                btn.setOnAction(actionEvent -> {
-                    deleteOrder(String.valueOf(tm.getOrderId()));
-                });
                 tmList.add(tm);
             }
             tblOrder.setItems(tmList);
@@ -96,23 +84,28 @@ public class OrderFormController {
         }
     }
 
-    private void setData(OrderTm newValue) {
+    private void setData(partsTm newValue) {
         if (newValue != null) {
             orderIdTxt.setEditable(false);
             orderIdTxt.setText(String.valueOf(newValue.getOrderId()));
-            customerIdTxt.setText(newValue.getCustomerId());
-            subTxt.setText(newValue.getSubCategory());
+            partsBox.setValue(newValue.getPart().toString());
+            subTxt.setText(newValue.getPart());
             statusText.setText(newValue.getStatus());
+            totalTxt.setText(String.valueOf(newValue.getTotal()));
+            customerIdTxt.setText(newValue.getCustomerId());
         }
     }
 
     private void clearFields() {
         tblOrder.refresh();
+        totalTxt.clear();
+        partsBox.setValue(null);
         statusText.clear();
         subTxt.clear();
         customerIdTxt.clear();
         orderIdTxt.clear();
         orderIdTxt.setEditable(true);
+
     }
 
     public void backButtonOnAction(ActionEvent actionEvent) {
@@ -130,16 +123,18 @@ public class OrderFormController {
     }
 
     public void updateBtn(ActionEvent actionEvent) {
-        OrderDto dto = new OrderDto(
+        PartsDto dto = new PartsDto(
                 orderIdTxt.getText(),
                 dateTxt.getText(),
                 customerIdTxt.getText(),
                 subTxt.getText(),
-                statusText.getText()
+                statusText.getText(),
+                partsBox.getValue().toString(),
+                Double.parseDouble(totalTxt.getText())
         );
 
         try {
-            boolean isUpdated = orderBo.updateOrder(dto);
+            boolean isUpdated = partsBo.updateOrder(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Order "+dto.getId()+" Updated!").show();
                 loadOrderTable();
@@ -154,7 +149,7 @@ public class OrderFormController {
     private void deleteOrder(String code) {
 
         try {
-            boolean isDeleted = orderBo.deleteOrder(code);
+            boolean isDeleted = partsBo.deleteOrder(code);
             if (isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Order Deleted!").show();
                 loadOrderTable();
@@ -164,18 +159,6 @@ public class OrderFormController {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void radioBtn(ActionEvent actionEvent) {
-        if(preparedBtn.isSelected()) {
-            statusText.setText(preparedBtn.getText());
-        }
-        else if(processingBtn.isSelected()) {
-            statusText.setText(processingBtn.getText());
-        }
-        else if(completeBtn.isSelected()) {
-            statusText.setText(completeBtn.getText());
         }
     }
 }

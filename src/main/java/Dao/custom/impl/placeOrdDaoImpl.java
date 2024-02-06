@@ -2,11 +2,14 @@ package Dao.custom.impl;
 
 import Dao.custom.placeOrdDao;
 import Dao.util.HibernateUtil;
+import db.DBConnection;
 import dto.placeOrdDto;
 import entity.placeOrder;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -28,11 +31,6 @@ public class placeOrdDaoImpl implements placeOrdDao {
 
     @Override
     public List<placeOrder> getAll() throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
-    public placeOrdDto getLastOrder() throws SQLException, ClassNotFoundException {
         return null;
     }
     @Override
@@ -86,23 +84,21 @@ public class placeOrdDaoImpl implements placeOrdDao {
 //        return list;
 //    }
 //
-//    @Override
-//    public placeOrdDto getLastOrder() throws SQLException, ClassNotFoundException {
-//        String sql = "SELECT * FROM placeOrder ORDER BY OrderId DESC LIMIT 1";
-//        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
-//        ResultSet resultSet = pstm.executeQuery();
-//        if (resultSet.next()){
-//            return new placeOrdDto(
-//                    resultSet.getString(1),
-//                    resultSet.getString(2),
-//                    resultSet.getString(3),
-//                    resultSet.getString(4),
-//                    resultSet.getString(5),
-//                    null
-//            );
-//        }
-//        return null;
-//    }
+    @Override
+    public placeOrdDto getLastOrder() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM placeOrder ORDER BY OrderId DESC LIMIT 1";
+        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()){
+            return new placeOrdDto(
+                    resultSet.getString(1),
+                    Double.parseDouble(resultSet.getString(2)),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            );
+        }
+        return null;
+    }
 
 //}
 }

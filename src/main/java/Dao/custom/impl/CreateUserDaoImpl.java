@@ -2,9 +2,7 @@ package Dao.custom.impl;
 
 import Dao.custom.CreateUserDao;
 import Dao.util.HibernateUtil;
-import dto.OrderDto;
 import entity.CreateUser;
-import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

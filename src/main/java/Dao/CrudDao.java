@@ -12,4 +12,5 @@ public interface CrudDao<T> extends SuperDao{
     boolean delete(String value) throws SQLException, ClassNotFoundException;
 
     List<T> getAll() throws SQLException, ClassNotFoundException;
+
 }

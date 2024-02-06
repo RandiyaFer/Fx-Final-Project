@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="937.0" style="-fx-background-color: #0D2C68;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OrderFormController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="937.0" style="-fx-background-color: #0D2C68;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.orderPartsFormController">
    <children>
       <GridPane layoutX="-1.0" layoutY="-6.0" prefHeight="78.0" prefWidth="937.0">
          <columnConstraints>
@@ -84,17 +83,19 @@
       </GridPane>
       <GridPane layoutY="141.0" prefHeight="92.0" prefWidth="937.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="0.0" prefWidth="12.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="0.0" prefWidth="14.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="433.0" minWidth="0.0" prefWidth="134.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.0" minWidth="0.0" prefWidth="19.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="154.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.0" minWidth="9.0" prefWidth="15.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="161.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="7.0" prefWidth="21.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="172.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="121.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="0.0" prefWidth="17.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="98.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="0.0" prefWidth="16.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="433.0" minWidth="0.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.0" minWidth="0.0" prefWidth="15.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="144.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.0" minWidth="2.0" prefWidth="14.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="146.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="1.0" prefWidth="15.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="167.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="16.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="166.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="20.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints />
@@ -128,7 +129,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="orderIdTxt" focusColor="WHITE" prefHeight="13.0" prefWidth="148.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <JFXTextField fx:id="orderIdTxt" focusColor="WHITE" prefHeight="50.0" prefWidth="127.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -138,30 +139,12 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXTextField>
-            <JFXRadioButton fx:id="completeBtn" onAction="#radioBtn" prefHeight="21.0" prefWidth="112.0" style="-fx-background-color: #12cc88;" text="Complete" textFill="WHITE" GridPane.columnIndex="10" GridPane.rowIndex="3">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="radioStatus" />
-               </toggleGroup>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="preparedBtn" onAction="#radioBtn" prefHeight="5.0" prefWidth="112.0" style="-fx-background-color: #eb144c#EB144CBlockGithubHueAlpha;" text="Prepared" textFill="WHITE" toggleGroup="$radioStatus" GridPane.columnIndex="10" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="processingBtn" onAction="#radioBtn" prefHeight="21.0" prefWidth="112.0" style="-fx-background-color: #f6ca52;" text="Processing" textFill="WHITE" toggleGroup="$radioStatus" GridPane.columnIndex="10" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </JFXRadioButton>
             <Label alignment="CENTER" prefHeight="42.0" prefWidth="156.0" style="-fx-background-color: #C09B16;" text="Date" GridPane.columnIndex="7" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="dateTxt" focusColor="WHITE" prefHeight="39.0" prefWidth="166.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="7" GridPane.rowIndex="3">
+            <JFXTextField fx:id="dateTxt" focusColor="WHITE" prefHeight="39.0" prefWidth="172.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="7" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -169,17 +152,25 @@
             <JFXTextField fx:id="statusText" focusColor="WHITE" prefHeight="66.0" prefWidth="171.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="9" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="15.0" />
-               </font></JFXTextField>
+               </font>
+            </JFXTextField>
+            <Label alignment="CENTER" prefHeight="39.0" prefWidth="171.0" style="-fx-background-color: #C09B16;" text="Add Parts" GridPane.columnIndex="11" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="partsBox" focusColor="WHITE" prefHeight="61.0" prefWidth="165.0" unFocusColor="#c09b16" GridPane.columnIndex="11" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <TableView fx:id="tblOrder" layoutX="29.0" layoutY="318.0" prefHeight="377.0" prefWidth="877.0">
+      <TableView fx:id="tblOrder" layoutX="14.0" layoutY="318.0" prefHeight="377.0" prefWidth="892.0">
          <columns>
-            <TableColumn fx:id="orderIdCol" minWidth="70.0" prefWidth="130.0" text="Order Id" />
-            <TableColumn fx:id="custCol" prefWidth="173.0" text="Customer Id" />
-            <TableColumn fx:id="subCol" prefWidth="157.0" text="SubCategory" />
-            <TableColumn fx:id="dateCol" prefWidth="168.0" text="Date" />
-            <TableColumn fx:id="statusCol" prefWidth="137.0" text="Status" />
-            <TableColumn fx:id="option" prefWidth="108.0" text="Option" />
+            <TableColumn fx:id="orderIdCol" minWidth="70.0" prefWidth="119.0" text="Order Id" />
+            <TableColumn fx:id="custCol" prefWidth="165.0" text="Customer Id" />
+            <TableColumn fx:id="subCol" prefWidth="144.0" text="SubCategory" />
+            <TableColumn fx:id="dateCol" prefWidth="125.0" text="Date" />
+            <TableColumn fx:id="statusCol" prefWidth="133.0" text="Status" />
+            <TableColumn fx:id="parts" prefWidth="103.0" text="Parts" />
+            <TableColumn fx:id="total" prefWidth="100.0" text="Total" />
          </columns>
       </TableView>
       <Button layoutX="795.0" layoutY="253.0" mnemonicParsing="false" onAction="#updateBtn" prefHeight="40.0" prefWidth="111.0" style="-fx-background-color: #137F31;" text="Update" textFill="WHITE">

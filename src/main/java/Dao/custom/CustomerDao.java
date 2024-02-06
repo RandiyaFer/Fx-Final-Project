@@ -5,6 +5,8 @@ import Dao.CrudDao;
 import entity.Customer;
 import entity.Item;
 
-public interface CustomerDao extends CrudDao<Customer> {
+import java.sql.SQLException;
 
+public interface CustomerDao extends CrudDao<Customer> {
+    Customer get(String id) throws SQLException, ClassNotFoundException;
 }

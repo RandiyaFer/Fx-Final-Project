@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class LoginForm2Controller {
@@ -30,13 +31,30 @@ public class LoginForm2Controller {
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
         if (n==JOptionPane.YES_OPTION){
-            Stage stage = (Stage) pane.getScene().getWindow();
-            try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderForm.fxml"))));
-                stage.centerOnScreen();
-                stage.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            Object[] options2 = {"Change Status", "Add Additional Parts", "Nothing"};
+            int m = JOptionPane.showOptionDialog(f, "What do you in Orders?", "Confirm Box",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options2, options2[2]);
+            if (m==JOptionPane.YES_OPTION) {
+                Stage stage = (Stage) pane.getScene().getWindow();
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderForm.fxml"))));
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else if(m==JOptionPane.NO_OPTION){
+                Stage stage = (Stage) pane.getScene().getWindow();
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/selectOrder.fxml"))));
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else {
+                return;
             }
 
         }else if (n==JOptionPane.NO_OPTION){

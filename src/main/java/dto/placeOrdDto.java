@@ -11,9 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class placeOrdDto {
     private String OrderId;
-    private String customerID;
+    private double Advance;
     private String itemCode;
     private String userId;
-    private double Advance;
-    //private List<OrderDetailDto> list;
 }

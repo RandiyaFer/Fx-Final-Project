@@ -126,7 +126,8 @@
                <styleClass>
                   <String fx:value="combo-box" />
                   <String fx:value="cell" />
-               </styleClass></JFXComboBox>
+               </styleClass>
+            </JFXComboBox>
             <Label fx:id="descLbl" alignment="CENTER" prefHeight="37.0" prefWidth="166.0" style="-fx-background-color: #C09B16;" text="Description" GridPane.columnIndex="7" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="15.0" />

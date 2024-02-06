@@ -1,11 +1,11 @@
 package Dao.custom.impl;
 
-import Dao.custom.OrderDao;
+import Dao.custom.PartsDao;
 import Dao.util.HibernateUtil;
 import db.DBConnection;
 import dto.ItemDto;
-import dto.OrderDto;
-import entity.Orders;
+import dto.PartsDto;
+import entity.Parts;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -17,9 +17,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class OrderDaoImpl implements OrderDao {
+public class PartsDaoImpl implements PartsDao {
     @Override
-    public boolean save(Orders entity) throws SQLException, ClassNotFoundException {
+    public boolean save(Parts entity) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(entity);
@@ -33,17 +33,19 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean update(Orders entity) throws SQLException, ClassNotFoundException {
+    public boolean update(Parts entity) throws SQLException, ClassNotFoundException {
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Orders order = session.find(Orders.class, entity.getId());
-        order.setId(entity.getId());
-        order.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        order.setCustomer(entity.getCustomer());
-        order.setSubCategory(entity.getSubCategory());
-        order.setStatus(entity.getStatus());
-        session.save(order);
+        Parts parts = session.find(Parts.class, entity.getId());
+        parts.setId(entity.getId());
+        parts.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        parts.setCustomer(entity.getCustomer());
+        parts.setSubCategory(entity.getSubCategory());
+        parts.setStatus(entity.getStatus());
+        parts.setPart(entity.getPart());
+        parts.setTotal(entity.getTotal());
+        session.save(parts);
         transaction.commit();
         session.close();
         return true;
@@ -55,33 +57,35 @@ public class OrderDaoImpl implements OrderDao {
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(session.find(Orders.class, value));
+        session.delete(session.find(Parts.class, value));
         transaction.commit();
         session.close();
         return true;
     }
 
     @Override
-    public List<Orders> getAll() throws SQLException, ClassNotFoundException {
+    public List<Parts> getAll() throws SQLException, ClassNotFoundException {
         Session session = HibernateUtil.getSession();
-        Query query = session.createQuery("FROM Orders");
-        List<Orders> orderList = query.list();
+        Query query = session.createQuery("FROM Parts");
+        List<Parts> orderList = query.list();
         session.close();
         return orderList;
     }
 
     @Override
-    public OrderDto getLastOrder() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM orders ORDER BY orderId DESC LIMIT 1";
+    public PartsDto getLastOrder() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM Parts ORDER BY orderId DESC LIMIT 1";
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
         ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()){
-            return new OrderDto(
+            return new PartsDto(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getString(5)
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    Double.parseDouble(resultSet.getString(7))
             );
         }
         return null;

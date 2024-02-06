@@ -1,6 +1,5 @@
 package dto;
 
-import entity.OrdersKey;
 import lombok.*;
 
 @Getter
@@ -8,17 +7,25 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDto {
+public class PartsDto {
     private String id;
     private String date;
     private String customerId;
     private String subCategory;
     private String status;
+    private String part;
+    private Double total;
 
-    public OrderDto(String id, String date, String subCategory, String status) {
+    public PartsDto(String id, String date, String subCategory, String status,String part,Double total) {
         this.id=id;
         this.date=date;
         this.subCategory=subCategory;
         this.status=status;
+        this.part=part;
+        this.total=total;
+    }
+
+    public PartsDto(String text, String text1, String string, String text2, String text3) {
+
     }
 }

@@ -7,6 +7,7 @@ import Dao.custom.ItemDao;
 import Dao.custom.placeOrdDao;
 import Dao.util.DaoType;
 import dto.ItemDto;
+import dto.OrderDto;
 import dto.placeOrdDto;
 import entity.Item;
 import entity.Orders;
@@ -35,7 +36,6 @@ public class placeOrdBoImpl implements placeOrdBo {
     public boolean saveOrder(placeOrdDto dto) throws SQLException, ClassNotFoundException {
         return PlaceOrdDao.save(new placeOrder(
                 dto.getOrderId(),
-                dto.getCustomerID(),
                 dto.getItemCode(),
                 dto.getUserId(),
                 dto.getAdvance()
@@ -44,7 +44,21 @@ public class placeOrdBoImpl implements placeOrdBo {
 
     @Override
     public String generateId() throws SQLException, ClassNotFoundException {
-        return null;
+            try {
+                placeOrdDto dto = PlaceOrdDao.getLastOrder();
+                if (dto!=null){
+                    String id = dto.getOrderId();
+                    int num = Integer.parseInt(id.split("[D]")[1]);
+                    num++;
+                    return String.format("D%03d",num);
+                }else{
+                    return "D001";
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
     }
 
     //@Override

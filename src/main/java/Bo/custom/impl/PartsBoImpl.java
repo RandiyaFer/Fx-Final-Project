@@ -1,62 +1,72 @@
 package Bo.custom.impl;
 
 import Bo.custom.OrderBo;
+import Bo.custom.PartsBo;
 import Dao.DaoFactory;
 import Dao.custom.CustomerDao;
 import Dao.custom.OrderDao;
+import Dao.custom.PartsDao;
 import Dao.util.DaoType;
 import dto.OrderDto;
+import dto.PartsDto;
 import entity.Orders;
+import entity.Parts;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderBoImpl implements OrderBo {
+public class PartsBoImpl implements PartsBo {
 
 
-    private OrderDao orderDao = DaoFactory.getInstance().getDao(DaoType.ORDER);
+    private PartsDao partsDao = DaoFactory.getInstance().getDao(DaoType.PARTS);
     private CustomerDao customerDao = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
 
     @Override
-    public boolean saveOrder(OrderDto dto) throws SQLException, ClassNotFoundException {
+    public boolean saveOrder(PartsDto dto) throws SQLException, ClassNotFoundException {
 
         System.out.println(dto);
-        return orderDao.save(new Orders(
+        return partsDao.save(new Parts(
                 dto.getId(),
                 dto.getDate(),
                 customerDao.get(dto.getCustomerId()),
                 dto.getSubCategory(),
-                dto.getStatus()
+                dto.getStatus(),
+                dto.getPart(),
+                dto.getTotal()
         ));
     }
 
-    public boolean updateOrder(OrderDto dto) throws SQLException, ClassNotFoundException {
-        return orderDao.update(new Orders(
+    public boolean updateOrder(PartsDto dto) throws SQLException, ClassNotFoundException {
+        return partsDao.update(new Parts(
                 dto.getId(),
                 dto.getDate(),
                 customerDao.get(dto.getCustomerId()),
                 dto.getSubCategory(),
-                dto.getStatus()
+                dto.getStatus(),
+                dto.getPart(),
+                dto.getTotal()
         ));
     }
 
     @Override
     public boolean deleteOrder(String code) throws SQLException, ClassNotFoundException {
-        return orderDao.delete(code);
+        return partsDao.delete(code);
     }
 
-    public List<OrderDto> allOrders() throws SQLException, ClassNotFoundException {
-        List<Orders> orders = orderDao.getAll();
+    public List<PartsDto> allOrders() throws SQLException, ClassNotFoundException {
+        List<Parts> parts = partsDao.getAll();
 
-        List<OrderDto> list = new ArrayList<>();
-        for (Orders order:orders) {
-            list.add(new OrderDto(
-                    order.getId(),
-                    order.getDate(),
-                    order.getCustomer().getCustomerID(),
-                    order.getSubCategory(),
-                    order.getStatus()
+        List<PartsDto> list = new ArrayList<>();
+        for (Parts part:parts) {
+            list.add(new PartsDto(
+                    part.getId(),
+                    part.getDate(),
+                    part.getCustomer().getCustomerID(),
+                    part.getSubCategory(),
+                    part.getStatus(),
+                    part.getPart(),
+                    part.getTotal()
             ));
         }
         return list;
@@ -65,7 +75,7 @@ public class OrderBoImpl implements OrderBo {
     @Override
     public String generateId() throws SQLException, ClassNotFoundException {
         try {
-            OrderDto dto = orderDao.getLastOrder();
+            PartsDto dto = partsDao.getLastOrder();
             if (dto!=null){
                 String id = String.valueOf(dto.getId());
                 int num = Integer.parseInt(id.split("[D]")[1]);

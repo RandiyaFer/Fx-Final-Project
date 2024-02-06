@@ -1,8 +1,6 @@
 package dto.tm;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import entity.OrdersKey;
-import javafx.scene.control.Button;
 import lombok.*;
 
 @Getter
@@ -10,11 +8,12 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderTm extends RecursiveTreeObject<OrderTm> {
+public class partsTm extends RecursiveTreeObject<partsTm> {
     private String orderId;
     private String date;
     private String customerId;
     private String subCategory;
     private String status;
-    private Button btn;
+    private String part;
+    private Double total;
 }

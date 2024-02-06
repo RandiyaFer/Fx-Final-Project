@@ -1,0 +1,15 @@
+.custId .cell {
+    -fx-text-fill:  #C09B16;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 15px;
+}
+.itemId .cell {
+    -fx-text-fill:  #C09B16;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 15px;
+}
+.userId .cell {
+    -fx-text-fill:  #C09B16;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 15px;
+}

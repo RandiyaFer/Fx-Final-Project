@@ -68,6 +68,7 @@ public class PlaceOrderFormController {
     private CustomerBo customerBo = new CustomerBoImpl();
     private ItemBo itemBo = new ItemBoImpl();
     private OrderBo orderBo= new OrderBoImpl();
+    private PartsBo partsBo= new PartsBoImpl();
     private CreateUserBo usersBo= new CreateUserBoImpl();
     private placeOrdBo PlaceOrdBo= new placeOrdBoImpl();
     private List<CustomerDto> customers;
@@ -108,7 +109,6 @@ public class PlaceOrderFormController {
         itemBox.getSelectionModel().selectedItemProperty().addListener((observableValue, o, newValue) -> {
             for (ItemDto dto:items) {
                 if (dto.getItemCode().equals(newValue.toString())){
-                    descTxt.setText(dto.getDescription());
                     catTxt.setText(dto.getCategory());
                     subTxt.setText(dto.getSubCategory());
                     descTxt.setText(dto.getDescription());
@@ -129,7 +129,7 @@ public class PlaceOrderFormController {
 
     private void setOrderId() {
         try {
-            orderLbl.setText(orderBo.generateId());
+            orderLbl.setText(PlaceOrdBo.generateId());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -227,34 +227,41 @@ public class PlaceOrderFormController {
     }
 
 
-    public void placeOrderBtn(ActionEvent actionEvent) {
+    public void placeOrderBtn(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         List<placeOrdDto> list = new ArrayList<>();
         for (PlaceOrderTm tm:tmList) {
             list.add(new placeOrdDto(
                     orderLbl.getText(),
-                    custBox.getValue().toString(),
+                    Double.parseDouble(advanceTxt.getText()),
                     itemBox.getValue().toString(),
-                    user.getValue().toString(),
-                    Double.parseDouble(advanceTxt.getText())
+                    user.getValue().toString()
             ));
         }
 
-//        OrderDto dto = new OrderDto(
-//                    orderLbl.getText(),
-//                    time.getText(),
-//                    custBox.getValue().toString(),
-//                    subTxt.getText(),
-//                    stsLbl.getText()
-//                );
-
+        OrderDto dto1 = new OrderDto(
+                    orderLbl.getText(),
+                    time.getText(),
+                    custBox.getValue().toString(),
+                    subTxt.getText(),
+                    stsLbl.getText()
+                );
         placeOrdDto dto = new placeOrdDto(
                 orderLbl.getText(),
-                custBox.getValue().toString(),
+                Double.parseDouble(advanceTxt.getText()),
                 itemBox.getValue().toString(),
-                user.getValue().toString(),
-                Double.parseDouble(advanceTxt.getText())
+                user.getValue().toString()
         );
-        clearFields();
+
+        PartsDto dto3 = new PartsDto(
+                orderLbl.getText(),
+                time.getText(),
+                custBox.getValue().toString(),
+                subTxt.getText(),
+                stsLbl.getText(),
+                ("not yet"),
+                (0.00)
+        );
+
         try {
             boolean isSaved = PlaceOrdBo.saveOrder(dto);
             if (isSaved){
@@ -268,6 +275,10 @@ public class PlaceOrderFormController {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+            orderBo.saveOrder(dto1);
+            partsBo.saveOrder(dto3);
+        System.out.println(custBox.getValue().toString());
+        clearFields();
     }
 
     private void clearFields() {
@@ -280,6 +291,6 @@ public class PlaceOrderFormController {
         nameTxt.clear();
         catTxt.clear();
         advanceTxt.clear();
-
+        TotalLb.setText(null);
     }
 }

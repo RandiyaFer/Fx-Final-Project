@@ -5,6 +5,7 @@ import Dao.util.HibernateUtil;
 import dto.CustomerDto;
 import dto.OrderDto;
 import entity.Customer;
+import entity.Orders;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -31,7 +32,6 @@ public class CustomerDaoImpl implements CustomerDao {
     public boolean update(Customer entity) throws SQLException, ClassNotFoundException {
 
         Session session = HibernateUtil.getSession();
-
         Transaction transaction = session.beginTransaction();
         Customer customer = session.find(Customer.class, entity.getCustomerID());
         customer.setCustomerID(entity.getCustomerID());
@@ -62,5 +62,12 @@ public class CustomerDaoImpl implements CustomerDao {
         List<Customer> list = query.list();
         session.close();
         return list;
+    }
+
+
+    @Override
+    public Customer get(String id) throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSession();
+        return session.find(Customer.class, id);
     }
 }
