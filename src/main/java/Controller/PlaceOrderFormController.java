@@ -259,6 +259,7 @@ public class PlaceOrderFormController {
                 subTxt.getText(),
                 stsLbl.getText(),
                 ("not yet"),
+                (0),
                 (0.00)
         );
 

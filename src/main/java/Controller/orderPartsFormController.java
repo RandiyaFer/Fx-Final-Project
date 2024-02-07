@@ -1,13 +1,21 @@
 package Controller;
 
 import Bo.custom.PartsBo;
+import Bo.custom.addPartsBo;
 import Bo.custom.impl.PartsBoImpl;
+import Bo.custom.impl.addPartsBoImpl;
+import Dao.DaoFactory;
+import Dao.custom.CustomerDao;
+import Dao.custom.addPartsDao;
+import Dao.util.DaoType;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dto.OrderDto;
-import dto.PartsDto;
+import dto.*;
 import dto.tm.OrderTm;
+import dto.tm.PlaceOrderTm;
+import dto.tm.addPartsTm;
 import dto.tm.partsTm;
+import entity.Parts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +23,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -40,8 +50,15 @@ public class orderPartsFormController {
     public TableColumn total;
     public AnchorPane pane;
     public JFXTextField totalTxt;
+    public JFXTextField qtyText;
+    public JFXTextField amountText;
+    public TableColumn qtyCol;
+    private List<addPartsDto> parts2;
 
     private PartsBo partsBo = new PartsBoImpl();
+    private addPartsBo AddPartsBo = new addPartsBoImpl();
+
+    private double totals=0;
 
     private ObservableList<partsTm> tmList = FXCollections.observableArrayList();
 
@@ -52,13 +69,29 @@ public class orderPartsFormController {
         subCol.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         parts.setCellValueFactory(new PropertyValueFactory<>("part"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         total.setCellValueFactory(new PropertyValueFactory<>("total"));
         loadOrderTable();
 
-        partsBox.getItems().addAll("Antenna", "Board");
+        //partsBox.getItems().addAll("Antenna", "Board");
 
         tblOrder.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             setData((partsTm) newValue);
+        });
+        try {
+            parts2 = AddPartsBo.allOrders();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        loadParts();
+
+        partsBox.getSelectionModel().selectedItemProperty().addListener((observableValue, o, newValue) -> {
+            for (addPartsDto dto:parts2) {
+                if (dto.getName().equals(newValue.toString())){
+                    qtyText.setText("1");
+                    amountText.setText(String.valueOf(dto.getPrize()));
+                }
+            }
         });
     }
 
@@ -74,6 +107,7 @@ public class orderPartsFormController {
                         dto.getSubCategory(),
                         dto.getStatus(),
                         dto.getPart(),
+                        dto.getQty(),
                         dto.getTotal()
                 );
                 tmList.add(tm);
@@ -89,9 +123,10 @@ public class orderPartsFormController {
             orderIdTxt.setEditable(false);
             orderIdTxt.setText(String.valueOf(newValue.getOrderId()));
             partsBox.setValue(newValue.getPart().toString());
-            subTxt.setText(newValue.getPart());
+            subTxt.setText(newValue.getSubCategory());
             statusText.setText(newValue.getStatus());
             totalTxt.setText(String.valueOf(newValue.getTotal()));
+            qtyText.setText(String.valueOf(newValue.getQty()));
             customerIdTxt.setText(newValue.getCustomerId());
         }
     }
@@ -99,6 +134,7 @@ public class orderPartsFormController {
     private void clearFields() {
         tblOrder.refresh();
         totalTxt.clear();
+        qtyText.clear();
         partsBox.setValue(null);
         statusText.clear();
         subTxt.clear();
@@ -106,6 +142,15 @@ public class orderPartsFormController {
         orderIdTxt.clear();
         orderIdTxt.setEditable(true);
 
+    }
+
+    private void loadParts() {
+        ObservableList list = FXCollections.observableArrayList();
+
+        for (addPartsDto dto:parts2) {
+            list.add(dto.getName());
+        }
+        partsBox.setItems(list);
     }
 
     public void backButtonOnAction(ActionEvent actionEvent) {
@@ -130,6 +175,7 @@ public class orderPartsFormController {
                 subTxt.getText(),
                 statusText.getText(),
                 partsBox.getValue().toString(),
+                Integer.parseInt(qtyText.getText()),
                 Double.parseDouble(totalTxt.getText())
         );
 
@@ -160,5 +206,15 @@ public class orderPartsFormController {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void qtyAction(KeyEvent keyEvent) {
+        try {
+            totals= Double.parseDouble(amountText.getText()) * Double.parseDouble(qtyText.getText());
+            totalTxt.setText(String.valueOf(totals));
+        } catch (NumberFormatException nfe){
+            System.out.println(nfe);
+        }
+
     }
 }

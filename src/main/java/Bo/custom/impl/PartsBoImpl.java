@@ -33,6 +33,7 @@ public class PartsBoImpl implements PartsBo {
                 dto.getSubCategory(),
                 dto.getStatus(),
                 dto.getPart(),
+                dto.getQty(),
                 dto.getTotal()
         ));
     }
@@ -45,6 +46,7 @@ public class PartsBoImpl implements PartsBo {
                 dto.getSubCategory(),
                 dto.getStatus(),
                 dto.getPart(),
+                dto.getQty(),
                 dto.getTotal()
         ));
     }
@@ -66,6 +68,7 @@ public class PartsBoImpl implements PartsBo {
                     part.getSubCategory(),
                     part.getStatus(),
                     part.getPart(),
+                    part.getQty(),
                     part.getTotal()
             ));
         }

@@ -40,11 +40,7 @@ public class CustomerFormController {
     public TableColumn option;
     public Button saveBtn;
     public Button updateBtn;
-
-
-
     private CustomerBo customerBo = new CustomerBoImpl();
-
     private ObservableList<CustomerTm> tmList = FXCollections.observableArrayList();
 
     public void initialize(){
@@ -94,7 +90,6 @@ public class CustomerFormController {
             emailTxt.setText(newValue.getEmail());
         }
     }
-
     private void clearFields() {
         tblCust.refresh();
         emailTxt.clear();
@@ -103,7 +98,6 @@ public class CustomerFormController {
         customerIdTxt.clear();
         customerIdTxt.setEditable(true);
     }
-
     public void updateBtn(ActionEvent actionEvent) {
         CustomerDto dto = new CustomerDto(
                 customerIdTxt.getText(),
@@ -124,7 +118,6 @@ public class CustomerFormController {
             e.printStackTrace();
         }
     }
-
     public void saveBtn(ActionEvent actionEvent) {
         List<CustomerDto> list = new ArrayList<>();
         for (CustomerTm tm:tmList) {
@@ -135,7 +128,6 @@ public class CustomerFormController {
                     tm.getEmail()
             ));
         }
-
         CustomerDto dto = new CustomerDto(
                 customerIdTxt.getText(),
                 nameTxt.getText(),
@@ -143,7 +135,6 @@ public class CustomerFormController {
                 emailTxt.getText()
 
         );
-
         try {
             boolean isSaved = customerBo.saveCustomer(dto);
             if (isSaved){
@@ -173,9 +164,7 @@ public class CustomerFormController {
             throw new RuntimeException(e);
         }
     }
-
     private void deleteItem(String code) {
-
         try {
             boolean isDeleted = customerBo.deleteCustomer(code);
             if (isDeleted){

@@ -44,6 +44,7 @@ public class PartsDaoImpl implements PartsDao {
         parts.setSubCategory(entity.getSubCategory());
         parts.setStatus(entity.getStatus());
         parts.setPart(entity.getPart());
+        parts.setQty(entity.getQty());
         parts.setTotal(entity.getTotal());
         session.save(parts);
         transaction.commit();
@@ -85,7 +86,8 @@ public class PartsDaoImpl implements PartsDao {
                     resultSet.getString(4),
                     resultSet.getString(5),
                     resultSet.getString(6),
-                    Double.parseDouble(resultSet.getString(7))
+                    Integer.parseInt(resultSet.getString(7)),
+                    Double.parseDouble(resultSet.getString(8))
             );
         }
         return null;

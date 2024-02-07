@@ -25,6 +25,7 @@ public class Parts {
         private String subCategory;
         private String status;
         private String part;
+        private int qty;
         private Double total;
 
         @Override

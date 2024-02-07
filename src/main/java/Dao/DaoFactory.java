@@ -23,6 +23,7 @@ public class DaoFactory {
             case ORDER: return(T) new OrderDaoImpl();
             case PLACEORD:return(T) new placeOrdDaoImpl();
             case PARTS:return(T) new PartsDaoImpl();
+            case ADDS:return(T) new addPartsDaoImpl();
         }
         return null;
     }

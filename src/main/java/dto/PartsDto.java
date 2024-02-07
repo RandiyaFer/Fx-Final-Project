@@ -14,18 +14,16 @@ public class PartsDto {
     private String subCategory;
     private String status;
     private String part;
+    private int qty;
     private Double total;
 
-    public PartsDto(String id, String date, String subCategory, String status,String part,Double total) {
+    public PartsDto(String id, String date, String subCategory, String status,String part,int qty,Double total) {
         this.id=id;
         this.date=date;
         this.subCategory=subCategory;
         this.status=status;
         this.part=part;
+        this.qty=qty;
         this.total=total;
-    }
-
-    public PartsDto(String text, String text1, String string, String text2, String text3) {
-
     }
 }

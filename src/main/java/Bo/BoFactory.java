@@ -26,7 +26,7 @@ public class BoFactory {
             case ITEM: return (T) new ItemBoImpl();
             case ORDER: return (T) new OrderBoImpl();
             case PARTS: return (T) new PartsBoImpl();
-
+            case ADDS: return (T) new addPartsBoImpl();
            // case CUSTOMER: return (T) new CustomerBoImpl();
 //            case ORDER_DETAIL: return (T) new OrderDetailBoImpl();
 

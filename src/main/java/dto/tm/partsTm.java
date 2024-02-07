@@ -15,5 +15,6 @@ public class partsTm extends RecursiveTreeObject<partsTm> {
     private String subCategory;
     private String status;
     private String part;
+    private int qty;
     private Double total;
 }

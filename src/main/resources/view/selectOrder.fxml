@@ -100,9 +100,9 @@
             <RowConstraints maxHeight="66.0" minHeight="3.0" prefHeight="39.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="13.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="58.0" minHeight="4.0" prefHeight="40.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="58.0" minHeight="4.0" prefHeight="40.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="58.0" minHeight="7.0" prefHeight="9.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="58.0" minHeight="7.0" prefHeight="17.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
@@ -111,7 +111,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="166.0" style="-fx-background-color: #C09B16;" text="Status" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="166.0" style="-fx-background-color: #C09B16;" text="Status" GridPane.columnIndex="5" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -121,17 +121,17 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXTextField>
-            <Label alignment="CENTER" prefHeight="42.0" prefWidth="156.0" style="-fx-background-color: #C09B16;" text="Date" GridPane.columnIndex="7" GridPane.rowIndex="1">
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="156.0" style="-fx-background-color: #C09B16;" text="Date" GridPane.columnIndex="7" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="dateTxt" focusColor="WHITE" prefHeight="39.0" prefWidth="172.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="7" GridPane.rowIndex="3">
+            <JFXTextField fx:id="dateTxt" focusColor="WHITE" prefHeight="39.0" prefWidth="172.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="7" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="statusText" focusColor="WHITE" prefHeight="66.0" prefWidth="171.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <JFXTextField fx:id="statusText" focusColor="WHITE" prefHeight="66.0" prefWidth="171.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="5" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -142,7 +142,7 @@
                </font>
             </Label>
             <JFXComboBox fx:id="partsBox" focusColor="WHITE" prefHeight="61.0" prefWidth="165.0" unFocusColor="#c09b16" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Label fx:id="totalLbl" alignment="CENTER" prefHeight="37.0" prefWidth="166.0" style="-fx-background-color: #C09B16;" text="Total" GridPane.columnIndex="9" GridPane.rowIndex="1">
+            <Label fx:id="totalLbl" alignment="CENTER" prefHeight="37.0" prefWidth="185.0" style="-fx-background-color: #C09B16;" text="Total" GridPane.columnIndex="9" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -172,17 +172,38 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXTextField>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="166.0" style="-fx-background-color: #C09B16;" text="Qty" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="qtyText" focusColor="WHITE" onKeyReleased="#qtyAction" prefHeight="66.0" prefWidth="171.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="7" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="amountText" focusColor="WHITE" onKeyTyped="#qtyAction" prefHeight="66.0" prefWidth="171.0" style="-fx-text-fill: white;" unFocusColor="#c09b16" GridPane.columnIndex="5" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXTextField>
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="156.0" style="-fx-background-color: #C09B16;" text="Amount" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
       <TableView fx:id="tblOrder" layoutX="14.0" layoutY="390.0" prefHeight="305.0" prefWidth="906.0">
          <columns>
-            <TableColumn fx:id="orderIdCol" minWidth="70.0" prefWidth="119.0" text="Order Id" />
-            <TableColumn fx:id="custCol" prefWidth="165.0" text="Customer Id" />
-            <TableColumn fx:id="subCol" prefWidth="144.0" text="SubCategory" />
-            <TableColumn fx:id="dateCol" prefWidth="125.0" text="Date" />
-            <TableColumn fx:id="statusCol" prefWidth="133.0" text="Status" />
-            <TableColumn fx:id="parts" prefWidth="103.0" text="Parts" />
-            <TableColumn fx:id="total" prefWidth="116.0" text="Total" />
+            <TableColumn fx:id="orderIdCol" minWidth="70.0" prefWidth="89.0" text="Order Id" />
+            <TableColumn fx:id="custCol" prefWidth="107.0" text="Customer Id" />
+            <TableColumn fx:id="subCol" prefWidth="119.0" text="SubCategory" />
+            <TableColumn fx:id="statusCol" prefWidth="121.0" text="Status" />
+            <TableColumn fx:id="parts" prefWidth="105.0" text="Parts" />
+            <TableColumn fx:id="qtyCol" prefWidth="127.0" text="Quantity" />
+            <TableColumn fx:id="dateCol" prefWidth="127.0" text="Date" />
+            <TableColumn fx:id="total" prefWidth="110.0" text="Total" />
          </columns>
       </TableView>
       <Button layoutX="795.0" layoutY="335.0" mnemonicParsing="false" onAction="#updateBtn" prefHeight="40.0" prefWidth="111.0" style="-fx-background-color: #137F31;" text="Update" textFill="WHITE">
