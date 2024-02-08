@@ -24,6 +24,7 @@ public class DaoFactory {
             case PLACEORD:return(T) new placeOrdDaoImpl();
             case PARTS:return(T) new PartsDaoImpl();
             case ADDS:return(T) new addPartsDaoImpl();
+            case ADMIN:return(T) new adminDaoImpl();
         }
         return null;
     }

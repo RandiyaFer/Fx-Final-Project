@@ -126,39 +126,50 @@ public class ItemFormController {
     }
 
     public void saveBtn(ActionEvent actionEvent) {
-        List<ItemDto> list = new ArrayList<>();
-        for (ItemTm tm:tmList) {
-            list.add(new ItemDto(
-                    tm.getItemCode(),
-                    tm.getCategory(),
-                    tm.getSubCategory(),
-                    tm.getDescription()
-            ));
-        }
 
-        ItemDto dto = new ItemDto(
-                itemCodeTxt.getText(),
-                categoryTxt.getValue().toString(),
-                subTxt.getText(),
-                descTxt.getText()
+        String orderId = itemCodeTxt.getText();
 
-        );
-
-
-        try {
-            boolean isSaved = itemBo.saveItem(dto);
-            if (isSaved){
-                new Alert(Alert.AlertType.INFORMATION, "Item Saved!").show();
-                loadItemTable();
-                clearFields();
-            }else{
-                new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+        if (isValidOrderId(orderId)) {
+            List<ItemDto> list = new ArrayList<>();
+            for (ItemTm tm : tmList) {
+                list.add(new ItemDto(
+                        tm.getItemCode(),
+                        tm.getCategory(),
+                        tm.getSubCategory(),
+                        tm.getDescription()
+                ));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+
+            ItemDto dto = new ItemDto(
+                    itemCodeTxt.getText(),
+                    categoryTxt.getValue().toString(),
+                    subTxt.getText(),
+                    descTxt.getText()
+
+            );
+
+
+            try {
+                boolean isSaved = itemBo.saveItem(dto);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.INFORMATION, "Item Saved!").show();
+                    loadItemTable();
+                    clearFields();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Invalid OrderId!").show();
         }
+    }
+
+    private boolean isValidOrderId(String orderId) {
+        return orderId.matches("^D\\d{3}$");
     }
 
     public void searchBtn(ActionEvent actionEvent) {
