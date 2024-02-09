@@ -21,8 +21,7 @@ public class CreateUserBoImpl implements CreateUserBo {
     public boolean saveOrder(CreateUserDto dto) throws SQLException, ClassNotFoundException {
         return createDao.save(new CreateUser(
                 dto.getEmail(),
-                dto.getPassword(),
-                dto.getConfirm()
+                dto.getPassword()
         ));
     }
 
@@ -33,8 +32,7 @@ public class CreateUserBoImpl implements CreateUserBo {
         for (CreateUser createUser:entityList) {
             list.add(new CreateUserDto(
                     createUser.getEmail(),
-                    createUser.getPassword(),
-                    createUser.getConfirm()
+                    createUser.getPassword()
             ));
         }
         return list;

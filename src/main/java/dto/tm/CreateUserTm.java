@@ -11,5 +11,4 @@ import lombok.*;
 public class CreateUserTm extends RecursiveTreeObject<CreateUserTm> {
     private String email;
     private String password;
-    private String confirm;
 }

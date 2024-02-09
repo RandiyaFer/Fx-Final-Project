@@ -192,7 +192,6 @@ public class CustomerFormController {
                     tm.getEmail()
             ));
         }
-
         String customerId = customerIdTxt.getText();
         String customerName = nameTxt.getText();
         String customerContact = contNoTxt.getText();
@@ -201,7 +200,11 @@ public class CustomerFormController {
         if (isValidCustomerId(customerId)) {
             if (isValidContactNumber(customerContact)) {
                 if (isValidEmail(customerEmail)) {
-                    CustomerDto dto = new CustomerDto(customerId, customerName, customerContact, customerEmail);
+                    CustomerDto dto = new
+                            CustomerDto(customerId,
+                            customerName,
+                            customerContact,
+                            customerEmail);
                     try {
                         boolean isSaved = customerBo.saveCustomer(dto);
                         if (isSaved) {

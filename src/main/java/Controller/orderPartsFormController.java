@@ -73,8 +73,6 @@ public class orderPartsFormController {
         total.setCellValueFactory(new PropertyValueFactory<>("total"));
         loadOrderTable();
 
-        //partsBox.getItems().addAll("Antenna", "Board");
-
         tblOrder.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             setData((partsTm) newValue);
         });
@@ -94,7 +92,6 @@ public class orderPartsFormController {
             }
         });
     }
-
     private void loadOrderTable() {
         ObservableList<partsTm> tmList = FXCollections.observableArrayList();
         try {
@@ -117,7 +114,6 @@ public class orderPartsFormController {
             throw new RuntimeException(e);
         }
     }
-
     private void setData(partsTm newValue) {
         if (newValue != null) {
             orderIdTxt.setEditable(false);
@@ -130,7 +126,6 @@ public class orderPartsFormController {
             customerIdTxt.setText(newValue.getCustomerId());
         }
     }
-
     private void clearFields() {
         tblOrder.refresh();
         totalTxt.clear();
@@ -141,9 +136,7 @@ public class orderPartsFormController {
         customerIdTxt.clear();
         orderIdTxt.clear();
         orderIdTxt.setEditable(true);
-
     }
-
     private void loadParts() {
         ObservableList list = FXCollections.observableArrayList();
 
@@ -152,7 +145,6 @@ public class orderPartsFormController {
         }
         partsBox.setItems(list);
     }
-
     public void backButtonOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
@@ -163,10 +155,8 @@ public class orderPartsFormController {
             throw new RuntimeException(e);
         }
     }
-
     public void searchBtn(ActionEvent actionEvent) {
     }
-
     public void updateBtn(ActionEvent actionEvent) {
         PartsDto dto = new PartsDto(
                 orderIdTxt.getText(),
@@ -178,7 +168,6 @@ public class orderPartsFormController {
                 Integer.parseInt(qtyText.getText()),
                 Double.parseDouble(totalTxt.getText())
         );
-
         try {
             boolean isUpdated = partsBo.updateOrder(dto);
             if (isUpdated){
@@ -191,9 +180,7 @@ public class orderPartsFormController {
             e.printStackTrace();
         }
     }
-
     private void deleteOrder(String code) {
-
         try {
             boolean isDeleted = partsBo.deleteOrder(code);
             if (isDeleted){
@@ -202,12 +189,10 @@ public class orderPartsFormController {
             }else{
                 new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
             }
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
-
     public void qtyAction(KeyEvent keyEvent) {
         try {
             totals= Double.parseDouble(amountText.getText()) * Double.parseDouble(qtyText.getText());

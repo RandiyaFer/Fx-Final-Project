@@ -3,7 +3,7 @@ package Controller;
 import Bo.custom.adminBo;
 import Bo.custom.impl.adminBoImpl;
 import dto.AdminDto;
-import dto.ItemDto;
+import email.Email;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,9 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
 public class forgetFormFormController {
     public TextField otpTxt;
@@ -28,12 +35,11 @@ public class forgetFormFormController {
     public Button OkBtn2;
     private adminBo AdminBo = new adminBoImpl();
     private List<AdminDto> admins2;
-
     private String email;
     private String otpS;
     private String password;
     private String confirm;
-    String otp = "1234";
+    int otp = -1;
 
     public void backButtonOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
@@ -67,12 +73,11 @@ public class forgetFormFormController {
             }
         }
     }
-
     public void OkBtn(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         email = emailTxt.getText();
         if (isValidEmail(email)){
-            new Alert(Alert.AlertType.ERROR, "valid email!").show();
-
+            new Alert(Alert.AlertType.INFORMATION, "valid email!").show();
+                otp = sendEmail();
         }else {
             new Alert(Alert.AlertType.ERROR, "invalid email!").show();
         }
@@ -89,11 +94,10 @@ public class forgetFormFormController {
         }
         return isExist;
     }
-
     public void OkBtn2(ActionEvent actionEvent) {
         otpS = otpTxt.getText();
-        if (otpS.equals(otp)){
-            new Alert(Alert.AlertType.ERROR, "Ok,Enter new Password!").show();
+        if (otp==Integer.valueOf(otpS)){
+            new Alert(Alert.AlertType.INFORMATION, "Ok,Enter new Password!").show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Wrong otp,please try again!").show();
             otpTxt.clear();
@@ -104,5 +108,33 @@ public class forgetFormFormController {
      passwordTxt.clear();
      otpTxt.clear();
      emailTxt.clear();
+    }
+    private int sendEmail(){
+        //otp = -1;
+        String senderEmail = "randiya4fernando@gmail.com";
+        String recipientEmail = "pamindurandiya34@gmail.com";
+        //userDao.getEmail(userName);
+        Session session = Email.getInstance().getSession();
+
+        try {
+            // Create a message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(senderEmail));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipientEmail));
+            message.setSubject("E&E Service (pvt).Ltd");
+            otp = new Random().nextInt(10000 - 1000) + 1000;
+            //num = String.format("%14d", otp);
+            message.setText(String.valueOf(otp));
+
+            // Send the message
+            Transport.send(message);
+
+            System.out.println("Email sent successfully.");
+            OkBtn2.setDisable(false);
+        } catch (MessagingException e) {
+            System.out.println("Failed to send email. Error: " + e.getMessage());
+        }
+        return otp;
     }
 }

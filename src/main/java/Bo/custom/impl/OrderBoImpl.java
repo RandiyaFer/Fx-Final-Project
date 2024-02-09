@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderBoImpl implements OrderBo {
-
-
     private OrderDao orderDao = DaoFactory.getInstance().getDao(DaoType.ORDER);
     private CustomerDao customerDao = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
 

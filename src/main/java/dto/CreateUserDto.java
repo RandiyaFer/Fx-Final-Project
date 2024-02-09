@@ -10,5 +10,4 @@ import lombok.*;
 public class CreateUserDto {
     private String email;
     private String password;
-    private String confirm;
 }

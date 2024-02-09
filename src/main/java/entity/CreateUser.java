@@ -15,5 +15,4 @@ public class CreateUser {
     @Id
     private String email;
     private String password;
-    private String confirm;
 }

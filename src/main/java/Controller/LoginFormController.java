@@ -67,7 +67,6 @@ public class LoginFormController {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-
                 } else if (n == JOptionPane.NO_OPTION) {
                     Stage stage = (Stage) pane.getScene().getWindow();
                     try {
@@ -89,7 +88,6 @@ public class LoginFormController {
                 }
             }else {
                 new Alert(Alert.AlertType.ERROR, "Invalid Password!").show();
-                emailTxt.clear();
                 passwordTxt.clear();
             }
             } else {
@@ -109,7 +107,6 @@ public class LoginFormController {
         }
         return isExist;
     }
-
     private boolean isValidPass(String Password) {
         boolean isExist = false;
         for (AdminDto dto:admins) {
@@ -121,7 +118,6 @@ public class LoginFormController {
         }
         return isExist;
     }
-
     public void backButtonOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
